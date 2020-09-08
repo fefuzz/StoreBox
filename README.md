@@ -3,11 +3,8 @@ Welcome to Storebox, this repo is maintained with the aim of making the work on 
 
 ## Project Structure
 
-./Server
-|
-| ` All the Back-End code of the project `
-|
---> ./client 
-    |
-    | ` All the Front-End code of the project `
-    |
+## Back-End
+The project make use of public TDlib Api, Airgram wrapper, Express.js and MongoDb in the back-end side
+
+## Front-End
+The project make use of ReactJs framework on the front-end side
