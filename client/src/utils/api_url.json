@@ -1,0 +1,12 @@
+{
+    "Register_Url" : "https://fathomless-tor-29312.herokuapp.com/register",
+    "Login_Url" : "https://fathomless-tor-29312.herokuapp.com/login",
+    "GetList_Url" : "https://fathomless-tor-29312.herokuapp.com/getFileList",
+    "Download_Url" : "https://fathomless-tor-29312.herokuapp.com/downloadFile",
+    "Upload_Url" : "https://fathomless-tor-29312.herokuapp.com/uploadFile",
+    "CheckFile_Url" : "https://fathomless-tor-29312.herokuapp.com/uploadFile/checkStatus",
+    "VerifyPhone_Url" : "https://fathomless-tor-29312.herokuapp.com/insertNumber",
+    "VerifyCode_Url" : "https://fathomless-tor-29312.herokuapp.com/insertCode",
+    "CheckToken_Url" : "https://fathomless-tor-29312.herokuapp.com/checkToken",
+    "CheckAirgram_Url" : "https://fathomless-tor-29312.herokuapp.com/checkAirgramLogin"
+}

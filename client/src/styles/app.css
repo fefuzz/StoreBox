@@ -1,0 +1,30 @@
+.Main{
+    background-color: rgba(27, 30, 33, 1);
+    color: white;
+    text-align: center;
+  
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+form .simple-btn-white {
+    background:transparent;
+    border: 2px solid rgb(208, 233, 232);;
+    color: rgb(208, 233, 232);
+
+    cursor: pointer;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 158px;
+
+
+    transition: 100ms;
+}
+
+form .simple-btn-white:hover {
+    background-color: rgb(3, 178, 190);
+    border: 2px solid rgb(208, 233, 232);
+}

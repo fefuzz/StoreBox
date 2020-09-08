@@ -1,0 +1,4 @@
+{
+    "users_dir" : "./usrDir/",
+    "jwt_secret" : "YOUR_JWT_SECRET"
+}

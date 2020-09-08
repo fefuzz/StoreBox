@@ -1,0 +1,12 @@
+{
+    "Register_Url" : "http://localhost:8080/register",
+    "Login_Url" : "http://localhost:8080/login",
+    "GetList_Url" : "http://localhost:8080/getFileList",
+    "Download_Url" : "http://localhost:8080/downloadFile",
+    "Upload_Url" : "http://localhost:8080/uploadFile",
+    "CheckFile_Url" : "http://localhost:8080/uploadFile/checkStatus",
+    "VerifyPhone_Url" : "http://localhost:8080/insertNumber",
+    "VerifyCode_Url" : "http://localhost:8080/insertCode",
+    "CheckToken_Url" : "http://localhost:8080/checkToken",
+    "CheckAirgram_Url" : "http://localhost:8080/checkAirgramLogin"
+}

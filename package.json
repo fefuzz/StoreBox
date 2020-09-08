@@ -1,0 +1,47 @@
+{
+  "name": "storebox",
+  "version": "0.0.0",
+  "description": "StoreBox Server",
+  "homepage": "https://airgram.io",
+  "main": "src/airgram/upload.js",
+  "keywords": [
+    "airgram",
+    "telegram",
+    "telegram client",
+    "tdlib",
+    "express",
+    "server",
+    "backend"
+  ],
+  "scripts": {
+    "lint": "eslint src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/api_controller/api_controller.js",
+    "dev": "DEBUG=airgram* dotenv -e .env nodemon --config nodemon.json",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Pierpaolo Vanni",
+  "license": "GPL-3.0",
+  "repository": "",
+  "dependencies": {
+    "airgram": "^3.0.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.0",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^1.4.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "^1.18.9"
+  },
+  "private": true
+}
