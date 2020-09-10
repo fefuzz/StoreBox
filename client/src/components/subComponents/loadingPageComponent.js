@@ -1,13 +1,13 @@
 import React from 'react'
 
-import '../styles/loading_page.css'
+import '../../styles/loading_page.css'
 
-import logoImg from '../images/logo_simple.png'
+import logoImg from '../../images/logo_simple.png'
 
 function loadingPageComponent() {
     return (
         <div className='logoLoading'>
-            <img src={logoImg} alt="logo" />
+            <img src={logoImg} alt="" />
         </div>
     )
 }

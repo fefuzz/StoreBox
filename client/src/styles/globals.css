@@ -1,8 +1,13 @@
+.Main{
+    background-color: rgba(27, 30, 33, 1);
+    color: white;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
 .full-page-form{
     height: 100vh;
-    width: 100vw;
     display: grid;
-
     align-items: center;
 }
 
@@ -33,7 +38,7 @@ position: relative;
 .form-box .field-box input {
 	width: 80%;
 	font-size: 13px;
-	color: rgb(245, 245, 245);
+	color: rgb(0, 197, 211);
 	margin-bottom: 30px;
 	border: none;
 	border-bottom: 1px solid rgb(245, 245, 245);
@@ -49,7 +54,8 @@ position: relative;
     left: 10%;
     padding: 20px 0;
     font-size: 15px;
-    color: rgb(245, 245, 245);
+    color: rgb(0, 197, 211);
+    transition: 500ms;
 }
 
 .form-box .field-box input:focus ~ label,
@@ -78,7 +84,46 @@ position: relative;
     font-size: 13px;
 }
 
+.field-check-info p {
+    font-size: 13px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
 
+.field-check-info a {
+    color: #00c5d3;
+    
+}
+
+.field-check-info a:visited{
+    color: rgb(132, 0, 255)
+}
+
+.field-check{
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+
+.CheckboxLabel{
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.form-error-div {
+    background: rgba(255, 0, 0, 0.7);
+    width: 80%;
+    margin: auto;
+    color: rgb(245, 245, 245);
+    margin-top: 10px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px rgba(98,98,98,.6)
+}
+
+.form-error-div p{
+    padding: 7px;
+}
 
 @keyframes fadeInFromBottom {
     from{ 

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import FileList from './subComponents/mainPageComponent/fileListComp'
-import SideBar from './subComponents/mainPageComponent/sideBarComponent'
-import LoadingDivComponent from './subComponents/mainPageComponent/loadingDivComponent';
+import FileList from './mainPageComponent/fileListComp'
+import SideBar from './mainPageComponent/sideBarComponent'
+import LoadingDivComponent from './mainPageComponent/loadingDivComponent';
 
-import '../styles/main_page.css'
+import '../../styles/main_page.css'
 
 function mainPageComponent(props) {
 
@@ -17,6 +17,7 @@ function mainPageComponent(props) {
     let requestFileDownload = props.requestFileDownload
     let requestUploadFile = props.requestUploadFile
     let requestLogout = props.requestLogout
+    let updateUploadForm = props.updateUploadForm
 
 
     let render = () => {
@@ -24,7 +25,7 @@ function mainPageComponent(props) {
             case 'FREE':
                 return (
                     <>
-                    <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout}/>
+                    <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout} updateUploadForm={updateUploadForm}/>
                     <FileList userList={userList} downloadFile={requestFileDownload}/>
                     </>
                 )
@@ -32,7 +33,7 @@ function mainPageComponent(props) {
                 return (
                     <>
                     <LoadingDivComponent />
-                    <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout}/>
+                    <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout} updateUploadForm={updateUploadForm}/>
                     <FileList userList={userList} downloadFile={requestFileDownload}/>
                     </>
                 )

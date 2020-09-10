@@ -74,11 +74,12 @@
     margin-top: 5px;
     margin-bottom: 5px;
     
-    height: 50px;
-    width: 250px;
+    height: 150px;
+    width: 150px;
 
     display: grid;
-    grid-template-columns: 45px 200px;
+    grid-template-rows: 120px 30px;
+    border-radius: 6px;
 
     transition: 100ms;
 }
@@ -88,13 +89,23 @@
     font-size: 12px;
     margin: 0;
     padding: 0;
-    margin-left: 10px;
-    margin-top: 5px;
+    margin-left: 3px;
+    margin-top: 15px;
 }
 
 .file_img {
-    height: 50px;
-    box-shadow: 0px 13px 12px -4px #c6c6c6;
+    height: 130px;
+    box-shadow: 0px 2px 8px -5px #c6c6c6;
+
+    display: grid;
+    align-content: center;
+
+    border-bottom: 1px solid #c6c6c6;
+}
+
+.file_img img {
+    height: 115px;
+    margin: 0 auto;
 }
 
 .file_block:hover {
@@ -119,9 +130,8 @@
 
 .inputfile + label {
     font-size: 13px;
-
     width: 150px;
-
+    height: 25px;
     border: 2px solid rgb(208, 233, 232);
     padding: 2px;
     margin-bottom: 5px;
@@ -129,6 +139,8 @@
     display: inline-block;
 
     cursor: pointer;
+
+    overflow: hidden;
 
     transition: 100ms;
 }

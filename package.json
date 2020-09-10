@@ -17,7 +17,7 @@
     "lint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/api_controller/api_controller.js",
-    "dev": "DEBUG=airgram* dotenv -e .env nodemon --config nodemon.json",
+    "dev": "npm run build --prefix client && DEBUG=airgram* dotenv -e .env nodemon --config nodemon.json",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Pierpaolo Vanni",

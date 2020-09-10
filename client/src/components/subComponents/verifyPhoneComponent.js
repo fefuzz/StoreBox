@@ -1,11 +1,20 @@
 import React from 'react'
 
-import '../styles/verify_phone.css'
+import '../../styles/verify_phone.css'
 
 function verifyPhoneComponent(props) {
 
     //Utils Functions
     let requestVerifyPhone = props.requestVerifyPhone
+
+    //Errors
+    let error = props.error
+
+    let displayError = () => {
+        if(error !== "NO_ERROR") {
+            return (<div className='form-error-div'><p>{error}</p></div>)
+        }
+    }
 
     return (
         <div className='full-page-form'>
@@ -18,6 +27,7 @@ function verifyPhoneComponent(props) {
             </div>
             <input type='button' className='form-button' onClick={()=> {requestVerifyPhone()}} value='Submit'/>
         </form>
+        {displayError()}
         </div>
         </div>
     )

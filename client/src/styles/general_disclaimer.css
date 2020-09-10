@@ -1,0 +1,14 @@
+.Infos{
+    width: 90%;
+    height: max-content;
+    margin: 0 auto;
+    text-align: left;
+    padding: 10px;
+    background: #fffaf0;
+    color: rgb(61, 61, 61);
+    box-shadow: 0 15px 15px rgba(0,0,0,.6);
+}
+
+.Infos h2{
+    text-align: center;
+}

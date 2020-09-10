@@ -1,9 +1,10 @@
 import React from 'react'
 
-import '../styles/start_page.css'
-import logo from '../images/logo.png'
+import '../../styles/start_page.css'
+import logo from '../../images/logo.png'
 
 function startPageComponent(props) {
+    
     let setLoginPage = props.setLoginPage
     let setRegisterPage = props.setRegisterPage
 

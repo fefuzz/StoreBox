@@ -23,14 +23,16 @@ const checkTokenUrl = json_url.CheckToken_Url
 const checkAirgramUrl = json_url.CheckAirgram_Url
 
 
-export let register = async (username, email, password, checkPsw) => {
+export let register = async (username, email, password, checkPsw, PrivacyCheckbox, ThermsCheckbox) => {
     //creating body of the request 
     //TODO: add function to do this work
     let body = {
         username,
         email,
         password,
-        "repsw" : checkPsw
+        "repsw" : checkPsw,
+        "privacy_agree" : PrivacyCheckbox,
+        "therms_agree" : ThermsCheckbox
     }
     return await axios.post(registerUrl, body)
 }

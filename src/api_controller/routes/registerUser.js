@@ -18,11 +18,21 @@ router.post('/', async (req, res) => {
     let password = req.body.password
     let check_password = req.body.repsw
     let email = req.body.email
+    let privacy_agree = req.body.privacy_agree
+    let therms_agree = req.body.therms_agree
 
     if(!username || !password || !check_password || !email){
       res.send({
         "status" : 416,
         "message" : "Some field Empty, please fill all the fields"
+      })
+      return;
+    }
+
+    if(!therms_agree || !privacy_agree){
+      res.send({
+        "status" : 416,
+        "message" : "Please Agree to Therms Conditions and Privacy Policy"
       })
       return;
     }
