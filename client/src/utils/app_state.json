@@ -11,5 +11,6 @@
         "register" : "NO_ERROR",
         "verify_code" : "NO_ERROR",
         "verify_phone" : "NO_ERROR"
-    }
+    },
+    "uploading_file_list" : []
 }

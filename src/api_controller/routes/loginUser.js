@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
         return;
       }
   
+      /*
       if(user.telegram_id === -1){
         res.send({
           "status" : 417,
@@ -36,22 +37,7 @@ router.post('/', async (req, res) => {
         })
         return
       }
-
-      let workAirgInstance = await airgController.airgInit(api_config.users_dir+username)
-
-      let authState = await workAirgInstance.api.getAuthorizationState()
-      if(authState.response._ != "authorizationStateReady"){
-        res.send({
-          "status" : 421,
-          "message" : "User not Ready",
-          "user" : authState.response._
-        });
-
-        let airgPause = await workAirgInstance.provider.pause()
-        let airgDestroy = await workAirgInstance.provider.destroy()
-
-        return
-      }
+      */
 
       //create user token
       const token = await jwt.sign(
@@ -63,12 +49,8 @@ router.post('/', async (req, res) => {
       if(!token) {
         res.send({
           "status" : 420,
-          "message" : "Error in token Creation"
+          "message" : "Error Authorizing User"
         })
-
-        let airgPause = await workAirgInstance.provider.pause()
-        let airgDestroy = await workAirgInstance.provider.destroy()
-
         return
       }
 
@@ -76,15 +58,11 @@ router.post('/', async (req, res) => {
 
       res.send({
         "status" : 200,
-        "message" : "Correct Code",
+        "message" : "User Logged",
         user
       })
 
       console.log("Api: User correctly enabled")
-
-      let airgPause = await workAirgInstance.provider.pause()
-      let airgDestroy = await workAirgInstance.provider.destroy()
-
       return
   
     } catch(error){
@@ -93,11 +71,6 @@ router.post('/', async (req, res) => {
         "status" : 500,
         "message" : "Internal Server Error"
       })
-
-      if(workAirgInstance){
-        let airgPause = await workAirgInstance.provider.pause()
-        let airgDestroy = await workAirgInstance.provider.destroy()
-      }
 
       return
     }

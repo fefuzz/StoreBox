@@ -3,8 +3,10 @@ import React from 'react'
 import FileList from './mainPageComponent/fileListComp'
 import SideBar from './mainPageComponent/sideBarComponent'
 import LoadingDivComponent from './mainPageComponent/loadingDivComponent';
+import TimelineComponent from './mainPageComponent/timelineComponent';
 
 import '../../styles/main_page.css'
+
 
 function mainPageComponent(props) {
 
@@ -12,6 +14,7 @@ function mainPageComponent(props) {
     let user = props.user
     let userList = props.userList
     let inUseApi = props.inUseApi
+    let fileUploading = props.fileUploading
 
     //Utils functions
     let requestFileDownload = props.requestFileDownload
@@ -26,6 +29,7 @@ function mainPageComponent(props) {
                 return (
                     <>
                     <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout} updateUploadForm={updateUploadForm}/>
+                    <TimelineComponent listUploading={fileUploading} />
                     <FileList userList={userList} downloadFile={requestFileDownload}/>
                     </>
                 )
@@ -34,6 +38,7 @@ function mainPageComponent(props) {
                     <>
                     <LoadingDivComponent />
                     <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout} updateUploadForm={updateUploadForm}/>
+                    <TimelineComponent listUploading={fileUploading} />
                     <FileList userList={userList} downloadFile={requestFileDownload}/>
                     </>
                 )

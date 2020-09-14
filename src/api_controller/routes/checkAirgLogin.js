@@ -16,20 +16,27 @@ router.post('/', async(req, res) => {
       let workAirgInstance = await airgController.airgInit(api_config.users_dir+username)
 
       let tgLoginResponse = await workAirgInstance.api.getAuthorizationState()
-  
-      if(tgLoginResponse.response._ != "authorizationStateReady"){
-        res.send(
-          {
-            "status" : 414,
-            "message" : tgLoginResponse.response._
-          }
-        )
-        return
+
+      let responseMessage
+
+      switch (tgLoginResponse.response._) {
+        case 'authorizationStateReady':
+          responseMessage = ({"status" : 200 , "message" : "User Ready"})
+          break
+        case 'authorizationStateWaitPhoneNumber':
+          responseMessage = ({"status" : 440 , "message" : "Waiting Phone Number"})
+          break
+        case 'authorizationStateWaitCode':
+          responseMessage = ({"status" : 441 , "message" : "Waiting Code"})
+          break
+        default:
+          responseMessage = ({"status" : 442 , "message" : "General Error"})
+          break
       }
   
       res.send({
-        "status" : 200,
-        "message" : "User Ready"
+        "status" : responseMessage.status,
+        "message" : responseMessage.message
       })
 
       let airgPause = await workAirgInstance.provider.pause()

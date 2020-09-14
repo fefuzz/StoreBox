@@ -1,5 +1,22 @@
 const bcrypt = require('bcryptjs')
 
+
+async function getAllUsers (client) {
+  try {
+
+    const database = client.db('StoreBox')
+    const collection = database.collection('users')
+
+    let result = await collection.find({})
+
+    return result
+
+  } catch(error){
+    console.log(error)
+    return null
+  }
+}
+
 async function searchUserByUsername(client, username) {
     try {
 
@@ -152,5 +169,6 @@ let insertUserTgCode = async (client, username, tgUserCode) => {
     searchUserByEmail : async (mInstance, email) => {return await searchUserByEmail(mInstance, email)},
     userLogin : async (mInstance, user, psw) => {return await userLogin(mInstance, user, psw)},
     insertNewUser : async (mInstance, username, psw, email, tgUserCode) => { return await insertNewUser(mInstance, username, psw, email, tgUserCode)},
-    insertUserTgCode : async(mInstance, username, tgUserCode) => {return await insertUserTgCode(mInstance, username, tgUserCode)}
+    insertUserTgCode : async(mInstance, username, tgUserCode) => {return await insertUserTgCode(mInstance, username, tgUserCode)},
+    getAllUsers : async(mInstance) => {return await getAllUsers(mInstance)}
   }

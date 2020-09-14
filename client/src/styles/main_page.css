@@ -1,31 +1,40 @@
 .main_page {
     width: 100%;
+    min-height: 100vh;
+    background-color: #fffeee;
+    background-image: url('../images/pattern.svg');
+    background-repeat: repeat;
+    background-size: 400px;
 }
 
+.blurme { 
+    -webkikt-filter: url('#myblurfilter'); 
+    filter: url('#myblurfilter'); 
+}
 
 .sidebar {
-    background-color:rgb(0, 140, 149);
-    color: rgb(208, 233, 232);
+    background-color: #081f2be8;
+
+    color: #fffeee;
     height: 100vh;
     width: 170px;
     position: fixed;
-    float: left;
+    left: 0;
     overflow: hidden;
 
     -webkit-box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
     -moz-box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
     box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
 
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    border-right: 1px solid black;
+
     display: grid;
-    grid-template-rows: 60px 30px 50px auto 40px;
+    grid-template-rows: 60px 25px 59px auto 20px;
 
     transition: 200ms;
-}
-
-.sidebar:hover {
-    -webkit-box-shadow: 4px 0px 9px -8px rgb(136, 136, 136);
-    -moz-box-shadow: 4px 0px 9px -8px rgb(136, 136, 136);
-    box-shadow: 4px 0px 9px -8px rgb(136, 136, 136);
 }
 
 .sidebar .logo-simple{
@@ -39,10 +48,11 @@
     margin: 0px;
     padding: 0px;
 
-    margin-bottom: 10px;
-
     font-size: 15px;
     font-style: italic;
+
+    overflow: hidden;
+    text-align: center;
 }
 
 .sidebar .logout {
@@ -57,40 +67,114 @@
     text-decoration: underline;
 }
 
+
+.timeline {
+    background-color: #081f2be8;
+    color: #fffeee;
+    height: 100vh;
+    width: 170px;
+    position: fixed;
+    right: 0;
+    overflow: hidden;
+
+    -webkit-box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
+    -moz-box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
+    box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    border-left: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+    .uploading-element  {
+        height: 40px;
+        width: 95%;
+        margin: 0 auto;
+
+        border: 2px solid #d0e9e8;
+        margin-bottom: 5px;
+        overflow: hidden;
+        animation: fadeInAndGrow 600ms;
+    }
+
+
+
+    .uploading-element p {
+        padding: 0px;
+        margin: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 13px;
+    }
+
+    .animate-fadeout {
+        animation: fadeOutSimple 1s;
+    }
+
+
+
 .file_list{
     width: auto;
     margin-left: 180px;
-    margin-right: 10px;
+    margin-right: 180px;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: 10px;
+    grid-template-columns: repeat( auto-fit, minmax(150px, 150px) );
+    column-gap: 15px;
 }
 
 .file_block {
-    border: 2px solid rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    background-color: #47474752;
+
     cursor: pointer;
     overflow: hidden;
+
+    margin: 0 auto;
     margin-top: 5px;
     margin-bottom: 5px;
     
     height: 150px;
-    width: 150px;
+    width: 140px;
 
     display: grid;
     grid-template-rows: 120px 30px;
-    border-radius: 6px;
+    border-radius: 25px;
 
     transition: 100ms;
 }
 
+.file_block:hover {
+    width: 150px;
+}
+
+.file-block-blur {
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+
+    transition: 500ms;
+}
+
+.file-block-blur:hover {
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
 .file_block p {
-    text-align: left;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
     font-size: 12px;
     margin: 0;
     padding: 0;
-    margin-left: 3px;
     margin-top: 15px;
+    color: #fffeee;
+    font-weight: bold;
+    overflow: hidden;
 }
 
 .file_img {
@@ -100,22 +184,16 @@
     display: grid;
     align-content: center;
 
-    border-bottom: 1px solid #c6c6c6;
+    transition: 500ms;
+}
+
+.file_img:hover {
+    transform: scale(1.06);
 }
 
 .file_img img {
     height: 115px;
     margin: 0 auto;
-}
-
-.file_block:hover {
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    background-color: rgba(255, 255, 255, 0.8);
-    color: rgba(0, 0, 0, 0.8);
-}
-
-.file_block:active {
-    background-color: rgba(255, 255, 255, 1);
 }
 
 .inputfile {
@@ -131,9 +209,10 @@
 .inputfile + label {
     font-size: 13px;
     width: 150px;
-    height: 25px;
     border: 2px solid rgb(208, 233, 232);
     padding: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     margin-bottom: 5px;
 
     display: inline-block;
@@ -157,7 +236,7 @@
     display: grid;
 
     background-color: rgba(3, 178, 190, 0.5);
-    position: absolute;
+    position: fixed;
     z-index: 99;
 
     align-items: center;
