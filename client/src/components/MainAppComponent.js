@@ -25,11 +25,20 @@ import {
     checkToken, checkAirgramAuth
   } from '../utils/axios_apis'
 
+
+import {
+  insertElemInTimeline,
+  removeElemFromTimeline
+} from '../utils/update_timeline'
+
 import app_state_json from '../utils/app_state.json'
+
+let sem_wait = 1 //for waiting the operations in list
 
 function MainAppComponent() {
 
     const [ appState , setAppState] = useState(app_state_json)
+    const [ queue, setQueue] = useState({"op_name" : "NO_OP"})
 
     let AppStateSetter = (workState) => {
 
@@ -37,67 +46,179 @@ function MainAppComponent() {
         "render" : workState.render,
         "user" : workState.user,
         "file_list" : workState.file_list,
-        "sem_api" : workState.sem_api,
-        "component_errors" : workState.component_errors,
-        "uploading_file_list" : workState.uploading_file_list
+        "component_errors" : workState.component_errors
       }
       setAppState(appoState)
     }
 
-
     useEffect(() => { 
-        //Hook to keep state of the logged in user after refresh of the application
+      //Hook to keep state of the logged in user after refresh of the application
 
-        //Get application global state
-        let workState = appState
+      //Get application global state
+      let workState = appState
 
-        try{
-          //Retrieve eventual user from the localstorage
-          const loggedInUser = localStorage.getItem("user");
-      
-          //If not exist return the start page
-          if(!loggedInUser){
-            workState.render = "START_PAGE"
-            AppStateSetter(workState)
-            return
-          }
-      
-          //If exist continue:
-      
-          //Parse the json
-          const foundUser = JSON.parse(loggedInUser);
-      
-          //Call the api in the axios_apis util file to retrieve user session by token
-          checkToken(foundUser.username, foundUser.token).then( async (responseToken) => {
-            if(responseToken.data.status === 200){
-              //If the status is 200 the token is not exiper yet, session active, retrieve user list
-              let responseUserList = await getUserList(foundUser.username, foundUser.token)
-
-              if(responseUserList.data.status === 200) {
-                workState.file_list = responseUserList.data
-              }
-
-              workState.user = foundUser
-              workState.render = "MAIN_PAGE"
-            }
-            else{
-              //Else the token is expired, or other error, the user in the localStorage is cleared
-              //And the page is setted to start page
-              localStorage.clear("user")
-              workState.render = "START_PAGE"
-            }
-
-            AppStateSetter(workState)
-          
-          })
-        } catch(error){ //some error appear, go to start page and delete user in local storage
+      try{
+        //Retrieve eventual user from the localstorage
+        const loggedInUser = localStorage.getItem("user");
+    
+        //If not exist return the start page
+        if(!loggedInUser){
           workState.render = "START_PAGE"
-          localStorage.clear("user")
           AppStateSetter(workState)
+          return
         }
-      }, []) //[] means that only at first application loading the hook trigger, so only after a refresh
     
+        //If exist continue:
     
+        //Parse the json
+        const foundUser = JSON.parse(loggedInUser);
+    
+        //Call the api in the axios_apis util file to retrieve user session by token
+        checkToken(foundUser.username, foundUser.token).then( async (responseToken) => {
+          if(responseToken.data.status === 200){
+            //If the status is 200 the token is not exiper yet, session active, retrieve user list
+            let responseUserList = await getUserList(foundUser.username, foundUser.token)
+
+            if(responseUserList.data.status === 200) {
+              workState.file_list = responseUserList.data
+            }
+
+            workState.user = foundUser
+            workState.render = "MAIN_PAGE"
+          }
+          else{
+            //Else the token is expired, or other error, the user in the localStorage is cleared
+            //And the page is setted to start page
+            localStorage.clear("user")
+            workState.render = "START_PAGE"
+          }
+
+          AppStateSetter(workState)
+        
+        })
+      } catch(error){ //some error appear, go to start page and delete user in local storage
+        workState.render = "START_PAGE"
+        localStorage.clear("user")
+        AppStateSetter(workState)
+      }
+    }, []) //[] means that only at first application loading the hook trigger, so only after a refresh
+
+    useEffect(() => {
+
+      if(queue.op_name === "NO_OP") return
+
+      let downloadFileEffect = async () => {
+
+        let objQueue = queue
+
+        let downloadFileResponse = await downloadFile(objQueue.file_id, objQueue.username, objQueue.token)
+        download(downloadFileResponse.data, downloadFileResponse.headers['x-suggested-filename'])
+
+        let appoStateQueue = {"op_name" : "NO_OP"}
+        setQueue(appoStateQueue)
+
+        removeElemFromTimeline()
+
+        sem_wait = 1
+      }
+
+      //Function to upload single file of a list of files, called by requestUploadFiles
+      let reqSingleWithCallback = async (files, username, token, i) => {
+
+        if(i === files.length){ //Last iteration of the function, no more files to upload
+          setQueue({"op_name" : "NO_OP"})
+          removeElemFromTimeline()
+          //call method to update file list
+
+          sem_wait = 1
+          return;
+        }
+
+        let uploadFileResponse = await uploadFile(files[i], username, token)
+
+        setTimeout(async function run() {
+          let uploadStatus = await checkFileStatus(uploadFileResponse.data.file_id, token)
+
+          if(uploadStatus.data.status === "UPLOADED"){
+            reqSingleWithCallback(files,username,token, ++i)
+            return;
+          }
+          setTimeout(run, 1000)
+        },1000)
+      }
+
+
+      let uploadFileEffect = async () => {
+
+        let objQueue = queue
+
+        //call function to upload every file starting from the first (at position 0)
+        await reqSingleWithCallback(objQueue.files, objQueue.username, objQueue.token, 0);
+      }
+
+
+      switch (queue.op_name){
+        case "DOWNLOAD_FILE" : 
+          downloadFileEffect()
+          return
+        case "UPLOAD_FILE" : 
+          uploadFileEffect()
+          return
+        default :
+          return
+      }
+    }, [queue])
+
+    let insertInQueue = (objQueue) => {
+      if(!objQueue || !objQueue.op_name || objQueue.op_name === "NO_OP") return //nothing to insert in queue
+
+      //calling method to insert in timeline
+      insertElemInTimeline(objQueue.op_name)
+
+      setTimeout(function run () {
+        //let workQueue = queue
+        if(/*workQueue && workQueue.op_name === "NO_OP"*/ sem_wait === 1){
+          sem_wait = 0
+          setQueue(objQueue)
+          return;
+        }
+
+        setTimeout(run, 1000)
+      }, 0)
+    }
+
+    //file download function
+    let requestFileDownload = (fileId) => {
+
+      let workState = appState
+
+      insertInQueue(
+        {
+          "op_name" : "DOWNLOAD_FILE", 
+          "file_id" : fileId,
+          "username" : workState.user.username,
+          "token" : workState.user.token
+        }
+      )
+    }
+
+    //Function to request multiple upload of files
+    let requestUploadFiles = async () => {
+      let workState = appState //get application state
+
+      let files = document.getElementById('fileSelected').files //get all files
+      if(!files) return;
+
+      insertInQueue(
+        {
+          "op_name" : "UPLOAD_FILE", 
+          "username" : workState.user.username,
+          "token" : workState.user.token,
+          files
+        }
+      )
+
+    }
     
     //Login function
     let requestLogin = async () => {    
@@ -114,9 +235,6 @@ function MainAppComponent() {
       //calling login and getUserList afther clicking on login button
       let response = await login(username, password)
       let responseAuth = await checkAirgramAuth(username)
-  
-      console.log(response)
-      console.log(responseAuth)
 
       
       //Error in Login process: retry login 
@@ -162,92 +280,6 @@ function MainAppComponent() {
 
       AppStateSetter(workState)
     }
-  
-    //file download function
-    let requestFileDownload = async (fileId) => {
-
-      let workState = appState
-      workState.sem_api = "IN_USE"
-      AppStateSetter(workState)
-
-      let downloadFileResponse = await downloadFile(fileId, workState.user.username, workState.user.token)
-      download(downloadFileResponse.data, downloadFileResponse.headers['x-suggested-filename'])
-      
-      workState.sem_api = "FREE"
-      AppStateSetter(workState)
-
-    }
-
-
-    //Function to upload single file of a list of files, called by requestUploadFiles
-    let reqSingleWithCallback = async (files, i) => {
-
-      let workState = appState
-      workState.sem_api = "IN_USE"
-      AppStateSetter(workState)
-
-      if(i === files.length){ //Last iteration of the function, no more files to upload
-        workState.sem_api = "FREE"
-        AppStateSetter(workState)
-        return;
-      }
-
-      let uploadFileResponse = await uploadFile(files[i], workState.user.username, workState.user.token)
-
-      let checkTimer = setInterval( async () => {
-        let uploadStatus = await checkFileStatus(uploadFileResponse.data.file_id, workState.user.token)
-
-        if(uploadStatus.data.status === "UPLOADED"){
-            clearInterval(checkTimer)
-
-            //Uploading State: User File List, Permit to Update FileList Component
-  
-            //Get Old State of file list array and uploading file list array
-            let newFileListArray = workState.file_list.file_list
-            let newUploadingFileListArray = workState.uploading_file_list
-
-            //Add new File Response
-            newFileListArray.push(uploadStatus.data)
-
-            //Delete uploaded file from array
-            newUploadingFileListArray.shift()
-
-            //Construct new Json
-            let newFileListJson = {
-                "status" : 200,
-                "file_list" : newFileListArray
-            }
-            //Insert arrays as New State and Render page again
-            workState.file_list = newFileListJson
-            workState.uploading_file_list = newUploadingFileListArray
-            AppStateSetter(workState)
-
-            reqSingleWithCallback(files, ++i)
-        }
-      }, 1000)
-    }
-
-  
-    //Function to request multiple upload of files
-    let requestUploadFiles = async () => {
-      let workState = appState //get application state
-
-      let files = document.getElementById('fileSelected').files //get all files
-      if(!files) return;
-
-      //from the file list, get an array with all files name
-      let uploadingFiles = Array.from(files).map(elem => {
-        return elem.name
-      })
-
-      //update state of application with the current uploading files to add in the side timeline
-      workState.uploading_file_list = uploadingFiles
-      AppStateSetter(workState)
-
-      //call function to upload every file starting from the first (at position 0)
-      await reqSingleWithCallback(files, 0);
-    }
-
 
     //logout function
     let requestLogout = () => {
@@ -312,12 +344,17 @@ function MainAppComponent() {
       let workState = appState
 
       let telephone = document.getElementById('phoneField').value
+      let prefix = document.getElementById('country-code').value
+
+      let complete_number = `${prefix}${telephone}`
+
+      console.log(complete_number)
   
       //render loading component
       workState.render = "LOADING_PAGE"
       AppStateSetter(workState)
   
-      let response = await verifyPhone(workState.user.username, telephone)
+      let response = await verifyPhone(workState.user.username, complete_number)
   
       //Error in request, render again the verify phone page
       if(response.data.status !== 200){
@@ -351,9 +388,12 @@ function MainAppComponent() {
         AppStateSetter(workState)
         return
       }
+
+      let responseUserList = await getUserList(responseVerifyCode.data.user.username, responseVerifyCode.data.user.token)
   
       workState.user = responseVerifyCode.data.user
       workState.render = "MAIN_PAGE"
+      workState.file_list = responseUserList.data
       workState.component_errors.verify_code = "NO_ERROR" //reset error
       workState.component_errors.verify_phone = "NO_ERROR" //reset error
       localStorage.setItem('user', JSON.stringify(responseVerifyCode.data.user))
@@ -373,10 +413,9 @@ function MainAppComponent() {
       }
   
     }
-  
-  
     
     let renderPage = () => {
+
       let workState = appState
 
       if(workState.render === "START_PAGE"){
@@ -413,9 +452,7 @@ function MainAppComponent() {
         //Check if user is setted before render the MainPage
         return <MainPage 
                 user={workState.user} 
-                userList={workState.file_list} 
-                inUseApi={workState.sem_api}
-                fileUploading={workState.uploading_file_list}
+                userList={workState.file_list}
                 requestFileDownload={requestFileDownload}
                 requestUploadFile={requestUploadFiles}
                 requestLogout={requestLogout}
@@ -426,7 +463,6 @@ function MainAppComponent() {
         return <LoadingPage />
       }
     }
-    
 
     return (
         <div className='Main'>{renderPage()}</div>

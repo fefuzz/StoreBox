@@ -2,8 +2,10 @@ import React from 'react'
 
 import FileList from './mainPageComponent/fileListComp'
 import SideBar from './mainPageComponent/sideBarComponent'
-import LoadingDivComponent from './mainPageComponent/loadingDivComponent';
 import TimelineComponent from './mainPageComponent/timelineComponent';
+
+
+//<LoadingDivComponent />
 
 import '../../styles/main_page.css'
 
@@ -13,8 +15,6 @@ function mainPageComponent(props) {
     //State
     let user = props.user
     let userList = props.userList
-    let inUseApi = props.inUseApi
-    let fileUploading = props.fileUploading
 
     //Utils functions
     let requestFileDownload = props.requestFileDownload
@@ -24,30 +24,17 @@ function mainPageComponent(props) {
 
 
     let render = () => {
-        switch (inUseApi) {
-            case 'FREE':
-                return (
-                    <>
-                    <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout} updateUploadForm={updateUploadForm}/>
-                    <TimelineComponent listUploading={fileUploading} />
-                    <FileList userList={userList} downloadFile={requestFileDownload}/>
-                    </>
-                )
-            default:
-                return (
-                    <>
-                    <LoadingDivComponent />
-                    <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout} updateUploadForm={updateUploadForm}/>
-                    <TimelineComponent listUploading={fileUploading} />
-                    <FileList userList={userList} downloadFile={requestFileDownload}/>
-                    </>
-                )
-        }
-
+        return (
+            <>
+            <SideBar user={user} uploadFile={requestUploadFile} logout={requestLogout} updateUploadForm={updateUploadForm}/>
+            <TimelineComponent />
+            <FileList userList={userList} downloadFile={requestFileDownload}/>
+            </>
+        )
     }
 
     return (
-    <div className='main_page'>{render()}</div>
+    <div className='main_page' id='main-page'>{render()}</div>
     )
 }
 

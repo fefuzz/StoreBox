@@ -6,14 +6,21 @@
     align-items: center;
 }
 
+.StartPage .logo {
+    align-self: end;
+}
+
 .StartPage .logo img{
-    height: 280px;
-    margin-top: 0px;
-    animation: fadeInFromBottom 1s;
+    height: 125px;
+    margin-bottom: 15px;
+    animation: fadeInSimple 1000ms;
 }
 
 .StartPage .initial-actions{
     height: 90px;
+    align-self: baseline;
+    margin-top: 20px;
+    animation: fadeInDelay 1300ms;
 }
 
 .StartPage h3 {

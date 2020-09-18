@@ -37,7 +37,7 @@ function fileListComp(props) {
             {
                 userFileList.file_list.map(elem => {
                     return (
-                        <div className='file_block file-block-blur' key={elem._id} title={elem.filename} onClick={ async () => {await downloadFile(elem._id)} }>
+                        <div className='file_block' key={elem._id} title={elem.filename} onClick={ async () => {await downloadFile(elem._id)} }>
                             <div className='file_img'><img src={workIcon(elem.filetype)} alt='file'/></div>
                             <p>{elem.filename}</p>
                         </div>

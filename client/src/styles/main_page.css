@@ -1,44 +1,29 @@
 .main_page {
     width: 100%;
     min-height: 100vh;
-    background-color: #fffeee;
+    background-color: #F1F0E2;
     background-image: url('../images/pattern.svg');
     background-repeat: repeat;
     background-size: 400px;
 }
 
-.blurme { 
-    -webkikt-filter: url('#myblurfilter'); 
-    filter: url('#myblurfilter'); 
-}
-
 .sidebar {
-    background-color: #081f2be8;
-
-    color: #fffeee;
+    background-color: inherit;
+    color: #115896;
     height: 100vh;
     width: 170px;
     position: fixed;
     left: 0;
     overflow: hidden;
-
-    -webkit-box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
-    -moz-box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
-    box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
-
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-
-    border-right: 1px solid black;
-
+    border-right: 1px solid #33332f;
     display: grid;
-    grid-template-rows: 60px 25px 59px auto 20px;
-
-    transition: 200ms;
+    grid-template-rows: 90px 25px 59px auto 20px;
+    z-index: 99;
+    transition: .2s;
 }
 
 .sidebar .logo-simple{
-    width: 25%;
+    width: 70px;
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -69,51 +54,112 @@
 
 
 .timeline {
-    background-color: #081f2be8;
-    color: #fffeee;
+    background-color: inherit;
+    color: #33332f;
     height: 100vh;
     width: 170px;
     position: fixed;
     right: 0;
     overflow: hidden;
 
-    -webkit-box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
-    -moz-box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
-    box-shadow: 4px 0px 9px -5px rgb(136, 136, 136);
-
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-
-    border-left: 1px solid black;
+    border-left: 1px solid #33332f;
 
     display: flex;
     flex-direction: column;
+
+    z-index: 99;
 }
 
 
-    .uploading-element  {
-        height: 40px;
+    .operation-element  {
+        height: 25px;
         width: 95%;
         margin: 0 auto;
 
-        border: 2px solid #d0e9e8;
+        border: 2px solid #33332f;
         margin-bottom: 5px;
         overflow: hidden;
-        animation: fadeInAndGrow 600ms;
+        display:grid;
+        grid-template-columns: 40px auto;
+        column-gap: 5px;
+
+        align-items: center;
+
+        animation: fadeInAndGrow 400ms;
     }
 
+        .operation-element-dwn {
+            height: 20px;
+            width: 23px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .operation-element-dwn:before {
+        background-image: url('../images/dwn_icon.png');
+        
+        background-size: 23px 20px;
+        display: inline-block;
+
+        height: 20px;
+        width: 23px;
+
+        margin: 0 auto;
+
+        content:"";
+        }
+
+        .operation-element-up {
+            height: 20px;
+            width: 23px;
+
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .operation-element-up:before {
+            background-image: url('../images/up_icon.png');
+            
+            background-size: 23px 20px;
+            display: inline-block;
+            margin-left: 3px;
+
+            height: 20px;
+            width: 23px;
+
+            margin: 0 auto;
+
+            content:"";
+            }
 
 
-    .uploading-element p {
+
+        .operation-element p {
+            padding: 0px;
+            margin: 0px;
+            font-size: 12px;
+            text-align: left;
+
+            transition: 300ms;
+        }
+
+    .removing-element {
+        height: 20px;
+        width: 95%;
+        margin: 0 auto;
+
+        border: 2px solid #33332f;
+        margin-bottom: 5px;
+        overflow: hidden;
+        animation: fadeOutSimple 300ms;
+    }
+
+    .removing-element p {
         padding: 0px;
         margin: 0px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: 13px;
-    }
-
-    .animate-fadeout {
-        animation: fadeOutSimple 1s;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 10px;
     }
 
 
@@ -124,13 +170,13 @@
     margin-right: 180px;
 
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(150px, 150px) );
+    grid-template-columns: repeat( auto-fit, minmax(120px, 120px) );
     column-gap: 15px;
 }
 
 .file_block {
-    border: 2px solid rgba(0, 0, 0, 0.8);
-    background-color: #47474752;
+    border: 1px solid #33332f;
+    background-color: #F1F0E2;
 
     cursor: pointer;
     overflow: hidden;
@@ -140,46 +186,30 @@
     margin-bottom: 5px;
     
     height: 150px;
-    width: 140px;
+    width: 120px;
 
     display: grid;
     grid-template-rows: 120px 30px;
-    border-radius: 25px;
+    border-radius: 10px;
 
     transition: 100ms;
 }
 
-.file_block:hover {
-    width: 150px;
-}
-
-.file-block-blur {
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-
-    transition: 500ms;
-}
-
-.file-block-blur:hover {
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-}
-
 .file_block p {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #33332f;
     text-align: center;
-    font-size: 12px;
-    margin: 0;
+    font-size: 13px;
     padding: 0;
-    margin-top: 15px;
-    color: #fffeee;
-    font-weight: bold;
+    padding-top: 2px;
+    margin: 11px 0 0;
+    color: #F1F0E2;
     overflow: hidden;
+    z-index: 2;
 }
 
 .file_img {
+    background-color: #F1F0E2;
     height: 130px;
-    box-shadow: 0px 2px 8px -5px #c6c6c6;
 
     display: grid;
     align-content: center;
@@ -209,7 +239,7 @@
 .inputfile + label {
     font-size: 13px;
     width: 150px;
-    border: 2px solid rgb(208, 233, 232);
+    border: 2px solid #33332f;
     padding: 2px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -226,7 +256,8 @@
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-    background-color: rgb(3, 178, 190);
+    background-color: #33332f;
+    color: #F1F0E2
 }
 
 
@@ -251,15 +282,6 @@
     margin: 0 auto;
 
     animation-name: spin;
-    animation-duration: 1000ms;
+    animation-duration: 2000ms;
     animation-iteration-count: infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform:rotate(0deg);
-    }
-    100% {
-        transform:rotate(360deg);
-    }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 import UploadForm from './uploadFileComp'
 
-import logoSimple from '../../../images/logo_simple.png'
+import logoSimple from '../../../images/logo_simple.svg'
 
 function sideBarComponent(props) {
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import logoImg from '../../../images/logo_simple.png'
+import logoImg from '../../../images/logo_simple.svg'
 
 function loadingDivComponent() {
     return (

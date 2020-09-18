@@ -1,8 +1,17 @@
-.verify_phone{
 
-}
 
 .verify_phone input {
     display: block;
     margin-bottom: 10px;
+}
+
+.country-code-title {
+    font-size: 12px;
+    color: rgb(0, 197, 211);
+    transition: 500ms;
+    text-align: center;
+}
+
+.country-code {
+    margin-bottom: 20px;
 }

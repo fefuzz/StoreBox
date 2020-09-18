@@ -1,4 +1,4 @@
-.logoLoading{
+.loading-page{
     height: 100vh;
     width: 100vw;
     display: grid;
@@ -7,22 +7,25 @@
 }
 
 
-.logoLoading img{
+.loading-page img{
     height: 70px;
     width: 70px;
     margin: 0 auto;
 
     animation-name: spin;
-    animation-duration: 1000ms;
+    animation-duration: 3000ms;
     animation-iteration-count: infinite;
 
 }
 
 @keyframes spin {
     0% {
-        transform:rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
     }
     100% {
-        transform:rotate(360deg);
+        transform: rotate(-0deg);
     }
 }

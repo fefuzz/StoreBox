@@ -5,12 +5,10 @@
         "file_list" : [], 
         "status" : 200 
     },
-    "sem_api" : "FREE",
     "component_errors" : {
         "login" : "NO_ERROR",
         "register" : "NO_ERROR",
         "verify_code" : "NO_ERROR",
         "verify_phone" : "NO_ERROR"
-    },
-    "uploading_file_list" : []
+    }
 }
