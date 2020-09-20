@@ -7,8 +7,8 @@ import './styles/globals.css'
 
 import MainApp from './components/MainAppComponent'
 import PrivacyPolicy from './components/PrivacyPolicyComponent'
-import ThermsConditions from './components/ThermsConditionsComponent'
-import WhoWeAre from './components/WhoWeAreComponent'
+import TermsConditions from './components/ThermsConditionsComponent'
+import About from './components/WhoWeAreComponent'
 
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
         <div>
           <Route exact path="/" component={MainApp} />
           <Route exact path="/privacy_policy" component={PrivacyPolicy} />
-          <Route exact path="/therms_conditions" component={ThermsConditions} />
-          <Route exact path='/who_we_are' component={WhoWeAre} />
+          <Route exact path="/terms_conditions" component={TermsConditions} />
+          <Route exact path='/about' component={About} />
         </div>
     </Router>
   );

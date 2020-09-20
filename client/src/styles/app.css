@@ -1,7 +1,8 @@
-form .simple-btn-white {
+.simple-btn-white {
     background:transparent;
     border: 2px solid rgb(208, 233, 232);;
     color: rgb(208, 233, 232);
+    font-family: 'Work Sans', sans-serif;
 
     cursor: pointer;
     padding-left: 3px;
@@ -14,15 +15,17 @@ form .simple-btn-white {
     transition: 100ms;
 }
 
-form .simple-btn-white:hover {
+.simple-btn-white:hover {
     background-color: rgb(3, 178, 190);
+    color: #33332f;
     border: 2px solid rgb(208, 233, 232);
 }
 
-form .simple-btn-black {
+.simple-btn-black {
     background:transparent;
     border: 2px solid #33332f;
     color: #33332f;
+    font-family: 'Work Sans', sans-serif;
 
     cursor: pointer;
     padding-left: 3px;
@@ -35,16 +38,17 @@ form .simple-btn-black {
     transition: 100ms;
 }
 
-form .simple-btn-black:hover {
+.simple-btn-black:hover {
     background-color: #33332f;
     color: #edf5e1;
 }
 
 
-form .simple-btn-blue {
+.simple-btn-blue {
     background:transparent;
     border: 2px solid #33332f;
     color: #115896;
+    font-family: 'Work Sans', sans-serif;
 
     cursor: pointer;
     padding-left: 3px;
@@ -57,7 +61,7 @@ form .simple-btn-blue {
     transition: 100ms;
 }
 
-form .simple-btn-blue:hover {
+.simple-btn-blue:hover {
     background-color: #33332f;
     color: #edf5e1;
 }

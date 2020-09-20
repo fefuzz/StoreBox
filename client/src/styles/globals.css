@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,500&display=swap');
+
 .Main{
     background-color: rgba(27, 30, 33, 1);
     color: white;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Work Sans', sans-serif;
 }
 
 .full-page-form{
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
     align-items: center;
+    grid-template-rows: 50px auto;
 }
 
 .form-box {
@@ -18,6 +22,7 @@
     padding: 10px;
     background: rgba(0,0,0,.5);
     box-shadow: 0 15px 15px rgba(0,0,0,.6);
+    margin-bottom: 30px;
 
     animation: fadeInSimple 500ms;
 }
@@ -70,6 +75,8 @@ position: relative;
     background-color: inherit;
     height: 40px;
     width: 100px;
+    font-family: 'Work Sans', sans-serif;
+
 
     border: 2px solid rgb(0, 140, 149);
     color: rgb(245, 245, 245);
@@ -107,7 +114,7 @@ position: relative;
 
 
 .CheckboxLabel{
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -153,6 +160,19 @@ position: relative;
         opacity: 0;
     }
     to { 
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInRotate {
+    0% { 
+        height: 80px;
+        transform: rotate(180deg);
+        opacity: 0;
+    }
+    100%{ 
+        height: 125px;
+        transform: rotate(0deg);
         opacity: 1;
     }
 }

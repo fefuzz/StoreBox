@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
       const token = await jwt.sign(
         { id: user._id },
         api_config.jwt_secret,
-        { expiresIn : 3600 }
+        { expiresIn : "24h" }
       )
 
       if(!token) {

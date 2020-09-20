@@ -4,6 +4,7 @@ function loginComponent(props) {
 
     //login function
     let requestLogin = props.login
+    let goStartPage = props.goStartPage
 
     //Errors
     let error = props.error
@@ -16,6 +17,9 @@ function loginComponent(props) {
 
     return (
         <div className='full-page-form'>
+            <div className='back-button'>
+                <input type="button" className="simple-btn-white" value="HOME" onClick={()=>{goStartPage()}}/>
+            </div>
             <div className="form-box">
             <h2 className='form-name'>Login</h2>
             <form>

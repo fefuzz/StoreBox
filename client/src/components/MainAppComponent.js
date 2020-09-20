@@ -154,6 +154,7 @@ function MainAppComponent() {
 
         //call function to upload every file starting from the first (at position 0)
         await reqSingleWithCallback(objQueue.files, objQueue.username, objQueue.token, 0);
+        await requestUserFileList()
       }
 
 
@@ -218,6 +219,22 @@ function MainAppComponent() {
         }
       )
 
+    }
+
+    //function to request a new file list of the user and set the state with the list
+    let requestUserFileList = async () => {
+      //Get application global state
+      let workState = appState
+
+      //controls on state
+      if(!workState || !workState.user || !workState.user.username || !workState.user.token) return
+
+      let responseUserList = await getUserList(workState.user.username, workState.user.token)
+
+      if(responseUserList.data.status !== 200) return 
+
+      workState.file_list = responseUserList.data
+      AppStateSetter(workState)
     }
     
     //Login function
@@ -389,8 +406,10 @@ function MainAppComponent() {
         return
       }
 
+      //get user list for that user
       let responseUserList = await getUserList(responseVerifyCode.data.user.username, responseVerifyCode.data.user.token)
   
+
       workState.user = responseVerifyCode.data.user
       workState.render = "MAIN_PAGE"
       workState.file_list = responseUserList.data
@@ -427,24 +446,28 @@ function MainAppComponent() {
       if(workState.render === "REGISTER_PAGE"){
         return <Register 
                 requestRegister={requestRegister}
+                goStartPage={requestLogout}
                 error = {appState.component_errors.register}
               />
       }
       if(workState.render === "VERIFY_PHONE_PAGE") {
         return <VerifyPhone
                 requestVerifyPhone={requestVerifyPhone}
+                goStartPage={requestLogout}
                 error = {appState.component_errors.verify_phone}
               />
       }
       if(workState.render === "VERIFY_CODE_PAGE") {
         return <VerifyCode 
                   requestVerifyCode={requestVerifyCode}
+                  goStartPage={requestLogout}
                   error = {appState.component_errors.verify_code}
               />
       }
       if(workState.render === "LOGIN_PAGE"){
         return <Login 
                   login={requestLogin}
+                  goStartPage={requestLogout}
                   error = {appState.component_errors.login}
                 />
       }

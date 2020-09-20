@@ -2,50 +2,85 @@
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template-rows: 1fr 1fr auto;
+    grid-template-rows: 1fr 130px 90px auto;
     align-items: center;
 }
 
 .StartPage .logo {
-    align-self: end;
+    align-self: center;
 }
 
 .StartPage .logo img{
     height: 125px;
     margin-bottom: 15px;
-    animation: fadeInSimple 1000ms;
+    animation: fadeInRotate 1000ms;
 }
 
-.StartPage .initial-actions{
+.StartPage .logo h1 {
+    font-family: 'EB Garamond', serif;
+    margin: 0;
+    padding: 0;
+    animation: fadeInDelay 1300ms;
+}
+
+.initial-actions{
     height: 90px;
-    align-self: baseline;
+    align-self: center;
     margin-top: 20px;
     animation: fadeInDelay 1300ms;
 }
 
-.StartPage h3 {
-        cursor: pointer;
-        display: block;
-        width: 150px;
-        margin: 0 auto;
-        border: 2px solid rgb(0, 140, 149);
-        color: rgb(245, 245, 245);
-        margin-bottom: 10px;
-        padding: 10px;
-        font-size: 13px;
+    .initial-actions h3 {
+            cursor: pointer;
+            display: block;
+            width: 150px;
+            margin: 0 auto;
+            border: 2px solid rgb(0, 140, 149);
+            color: rgb(245, 245, 245);
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
 
-        transition: 150ms;
+            transition: 150ms;
+    }
+
+    .initial-actions h3:hover {
+        cursor: pointer;
+        color: rgba(27, 30, 33, 1);
+        background-color: rgb(0, 140, 149);
+    }
+
+
+.other-actions {
+    height: 60px;
+    align-self: center;
+    margin-top: 20px;
+    animation: fadeInDelay 1300ms;
 }
 
+.other-actions a {
+    border: 2px solid #008c95;
+    font-size: 12px;
+    color: rgb(245, 245, 245);
+    padding: 3px;
+    text-decoration: none;
+	text-transform: uppercase;
+	margin: 5px;
+	display: inline-block;
+    width: 200px;
+    transition: 200ms;
+}
 
-.StartPage h3:hover {
-    cursor: pointer;
+.other-actions a:hover {
     color: rgba(27, 30, 33, 1);
     background-color: rgb(0, 140, 149);
-    margin-bottom: 10px;
-    padding: 10px;
-    font-size: 13px;
 }
+
+.other-actions a:active {
+    color : rgb(245, 245, 245);
+}
+
 
 
 .footer {

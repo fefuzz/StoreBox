@@ -1,14 +1,102 @@
 .Infos{
-    width: 90%;
-    height: max-content;
-    margin: 0 auto;
     text-align: left;
-    padding: 10px;
-    background: #fffaf0;
-    color: rgb(61, 61, 61);
-    box-shadow: 0 15px 15px rgba(0,0,0,.6);
+    font-family: 'Work Sans', sans-serif;
+    display: grid;
 }
 
-.Infos h2{
+.back-button-link {
+    border: 2px solid #008c95;
+    font-size: 12px;
+    color: rgb(245, 245, 245);
+    padding: 3px;
+    text-decoration: none;
+	text-transform: uppercase;
+	margin: 5px;
+	display: inline-block;
+    width: 50px;
     text-align: center;
+
+    justify-self: center;
+
+    transition: 200ms;
+}
+
+.back-button-link:hover {
+    color: rgba(27, 30, 33, 1);
+    background-color: rgb(0, 140, 149);
+}
+
+.back-button-link:active {
+    color : rgb(245, 245, 245);
+}
+
+
+.info-title-section {
+    width: max-content;
+    margin: 0 auto;
+	text-align: center;
+	font-family: "EB Garamond",serif;
+    color: #fffff8;
+    
+	display: grid;
+    grid-template-columns:30px auto;
+    column-gap: 10px;
+
+	align-content: center;
+	align-items: center;
+}
+
+.info-title-section img {
+    height: 30px;
+}
+
+.info-section-title{
+    background-color: #fffff8;
+    margin-bottom: 30px;
+    color: #33332f;
+    
+    -webkit-box-shadow: 0 10px 6px -6px black;
+    -moz-box-shadow: 0 10px 6px -6px black;
+    box-shadow: 0 10px 6px -6px black;
+}
+
+.info-section-title h3{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.info-section-title p{
+    text-align: justify;
+    padding-bottom: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.info-section {
+	background-color: #fffff8;
+	width: 525px;
+	margin: 0 auto;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    color: #33332f;
+    
+    -webkit-box-shadow: 0 10px 6px -6px black;
+    -moz-box-shadow: 0 10px 6px -6px black;
+    box-shadow: 0 10px 6px -6px black;
+
+    border-radius: 15px;
+}
+
+.info-section h3{
+    text-align: center;
+}
+
+.info-section p{
+    text-align: justify;
+    padding-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
