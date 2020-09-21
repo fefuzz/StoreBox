@@ -7,8 +7,6 @@ Welcome to Storebox, this repo is maintained with the aim of making the work on 
 Storebox is a Cloud Storage system that make use of Telegram chat to store files.
 All files uploaded/downloaded from Storebox is saved into the Saved Messages chat in Telegram. 
 
-## Project Structure
-
 ### Back-End
 The project make use of public TDlib Api, Airgram wrapper, Express.js, MongoDb and JWT in the back-end side
 Every Api is freely accessible by prior request for a token via login. In order to log into the system it is necessary to register using the appropriate "register" API
