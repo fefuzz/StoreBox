@@ -1,9 +1,11 @@
+<p align="center">
+  <img src="https://www.storebox.app/static/media/logo_simple.75287720.svg"/>
+</p>
+
 # StoreBox
 Welcome to Storebox, this repo is maintained with the aim of making the work on its web application public and accessible to all.
 Storebox is a Cloud Storage system that make use of Telegram chat to store files.
 All files uploaded/downloaded from Storebox is saved into the Saved Messages chat in Telegram. 
-
-
 
 ## Project Structure
 
